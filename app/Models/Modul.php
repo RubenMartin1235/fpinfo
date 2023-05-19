@@ -17,4 +17,8 @@ class Modul extends Model
     public function formativeUnits() {
         return $this->hasMany(FormativeUnit::class);
     }
+
+    public function prof() {
+        return $this->belongsTo(User::class, 'prof_id');
+    }
 }
