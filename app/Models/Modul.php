@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Modul extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'shortname',
+    ];
+
+    public function formativeUnits() {
+        return $this->hasMany(FormativeUnit::class);
+    }
 }

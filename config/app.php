@@ -182,7 +182,11 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
+        'User' => App\Models\User::class,
+        'Role' => App\Models\Role::class,
+        'Modul' => App\Models\Modul::class,
+        'Evaluation' => App\Models\Evaluation::class,
+        'FormativeUnit' => App\Models\FormativeUnit::class,
     ])->toArray(),
 
 ];

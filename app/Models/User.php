@@ -49,4 +49,7 @@ class User extends Authenticatable
     public function taughtModul() {
         return $this->hasMany(Modul::class, 'prof_id');
     }
+    public function evals() {
+        return $this->hasMany(EvaluationDetail::class);
+    }
 }
