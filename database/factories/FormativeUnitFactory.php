@@ -17,7 +17,10 @@ class FormativeUnitFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'shortname' => 'UF'.fake()->randomNumber(2),
+            'created_at'=>now(),
+            'updated_at'=>now(),
         ];
     }
 }

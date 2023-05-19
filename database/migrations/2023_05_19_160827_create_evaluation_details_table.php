@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignIdFor(App\Models\Evaluation::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(App\Models\User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(App\Models\FormativeUnit::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unsignedDecimal('score');
+            $table->unsignedDecimal('score')->nullable();
             $table->timestamps();
         });
     }

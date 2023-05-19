@@ -17,7 +17,9 @@ class RoleFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'created_at'=>now(),
+            'updated_at'=>now(),
         ];
     }
 }
