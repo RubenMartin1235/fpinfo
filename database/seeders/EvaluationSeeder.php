@@ -15,6 +15,9 @@ class EvaluationSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $ev = Evaluation::factory()->create([
+            'init_date' => now(),
+            'end_date' => now()->addYear(),
+        ]);
     }
 }

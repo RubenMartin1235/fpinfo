@@ -16,8 +16,13 @@ class EvaluationFactory extends Factory
      */
     public function definition(): array
     {
+        $interval = new \DateInterval('P1Y');
+        $end_date = (new \DateTime())->add($interval);
         return [
-            //
+            'init_date'=>now(),
+            'end_date'=>$end_date->format('Y-m-d H:i:s'),
+            'created_at'=>now(),
+            'updated_at'=>now(),
         ];
     }
 }
