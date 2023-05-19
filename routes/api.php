@@ -29,5 +29,24 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('profile/delete', [UserController::class, 'profileDelete']);
     Route::get('logout', [UserController::class, 'logout']);
 
-    Route::get('users/{user}', [UserController::class, 'show']);
+    Route::get('profile/{user}', [UserController::class, 'show']);
 });
+Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function () {
+    Route::post('profile', [UserController::class, 'store']);
+    Route::put('profile/{user}', [UserController::class, 'update']);
+    Route::delete('profile/{user}', [UserController::class, 'destroy']);
+});
+
+// MODULES
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('modules', [ModulController::class, 'index']);
+    Route::get('modules/{module}', [ModulController::class, 'show']);
+});
+Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function () {
+    Route::put('modules/{module}', [ModulController::class, 'update']);
+    Route::post('modules', [ModulController::class, 'store']);
+    Route::delete('modules/{module}', [ModulController::class, 'destroy']);
+});
+
+// UFS
+Route::get('modules/{module}/ufs', [ModulController::class, 'showByModul']);
