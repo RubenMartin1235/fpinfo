@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\FormativeUnit;
 use App\Models\Evaluation;
 use App\Models\User;
+use Carbon\Carbon;
 
 class EvaluationSeeder extends Seeder
 {
@@ -15,9 +16,15 @@ class EvaluationSeeder extends Seeder
      */
     public function run(): void
     {
-        $ev = Evaluation::factory()->create([
-            'init_date' => now(),
-            'end_date' => now()->addYear(),
-        ]);
+        $evdate_init = Carbon::now()->subYears(6);
+        $evdate_end = Carbon::now()->subYears(5);
+        for ($i=0; $i < 5; $i++) {
+            $ev = Evaluation::factory()->create([
+                'init_date' => $evdate_init,
+                'end_date' => $evdate_end,
+            ]);
+            $evdate_init->addYear();
+            $evdate_end->addYear();
+        }
     }
 }
