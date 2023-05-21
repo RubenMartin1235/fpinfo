@@ -63,13 +63,14 @@ Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function () {
 // EVALS
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('evaluations', [EvaluationController::class, 'index']);
-    Route::get('evaluations/{ev}', [EvaluationController::class, 'show']);
 });
 Route::group(['middleware' => ['auth:sanctum', 'role:teacher,admin']], function () {
+    Route::get('evaluations/{ev}', [EvaluationController::class, 'show']);
     Route::get('ufs/{uf}/evaluations', [EvaluationController::class, 'showByUF']);
     Route::get('profile/{uf}/evaluations', [EvaluationController::class, 'showByUser']);
 });
 Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function () {
+    Route::get('evaluations/all', [EvaluationController::class, 'showAll']);
     Route::post('evaluations', [EvaluationController::class, 'store']);
     Route::put('evaluations/{ev}', [EvaluationController::class, 'update']);
     Route::delete('evaluations/{ev}', [EvaluationController::class, 'destroy']);

@@ -12,5 +12,30 @@ use App\Models\User;
 
 class EvaluationController extends Controller
 {
-    //
+    public function index()
+    {
+        $evs = Auth::user()->evals()->get();
+        return response()->json([
+            'success' => true,
+            'data' => $evs->toArray()
+        ], 200);
+    }
+
+    public function show(Request $request, string $id)
+    {
+        $ev = Evaluation::findOrFail($id);
+        $evd = $ev->evaluationDetails;
+        return response()->json([
+            'success' => true,
+            'data' => $ev->toArray()
+        ], 200);
+    }
+    public function showAll()
+    {
+        $ev = Evaluation::all();
+        return response()->json([
+            'success' => true,
+            'data' => $ev->toArray()
+        ], 200);
+    }
 }
