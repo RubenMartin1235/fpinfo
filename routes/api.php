@@ -49,4 +49,28 @@ Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function () {
 });
 
 // UFS
-Route::get('modules/{module}/ufs', [ModulController::class, 'showByModul']);
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('ufs', [FormativeUnitController::class, 'index']);
+    Route::get('ufs/{uf}', [FormativeUnitController::class, 'show']);
+    Route::get('modules/{module}/ufs', [FormativeUnitController::class, 'showByModul']);
+});
+Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function () {
+    Route::put('ufs/{uf}', [FormativeUnitController::class, 'update']);
+    Route::post('ufs', [FormativeUnitController::class, 'store']);
+    Route::delete('ufs/{uf}', [FormativeUnitController::class, 'destroy']);
+});
+
+// EVALS
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('evaluations', [EvaluationController::class, 'index']);
+    Route::get('evaluations/{ev}', [EvaluationController::class, 'show']);
+});
+Route::group(['middleware' => ['auth:sanctum', 'role:teacher,admin']], function () {
+    Route::get('ufs/{uf}/evaluations', [EvaluationController::class, 'showByUF']);
+    Route::get('profile/{uf}/evaluations', [EvaluationController::class, 'showByUser']);
+});
+Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function () {
+    Route::post('evaluations', [EvaluationController::class, 'store']);
+    Route::put('evaluations/{ev}', [EvaluationController::class, 'update']);
+    Route::delete('evaluations/{ev}', [EvaluationController::class, 'destroy']);
+});

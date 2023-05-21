@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use App\Models\User;
+use App\Models\Role;
 
 
 class UserController extends Controller
@@ -60,11 +61,15 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
         ]);
-        $user = User::create([
+
+
+        $user = User::make([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        $role_std = Role::where('name', 'student')->first();
+        $user->role()->associate($role_std);
         $user->save();
 
         event(new Registered($user));
